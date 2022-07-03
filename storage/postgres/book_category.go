@@ -133,6 +133,7 @@ func (r *bookCategoryRepo) UpdateBookCategory(entity *models.UpdateBookCategory,
 		query += `category_name = :category_name,`
 	}
 
+
 	query += `updated_at = now() WHERE id =:id`
 
 	respult, err := r.db.NamedExec(query, params)

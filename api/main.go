@@ -61,6 +61,24 @@ func main() {
 			authors.PUT("/:id", handler.UpdateAuthor)
 			authors.DELETE("/:id", handler.DeleteAuthor)
 		}
+
+		book_category := v1.Group("/book_category")
+		{
+			book_category.POST("/", handler.CreateBookCategory)
+			book_category.GET("/", handler.GetAllBookCategories)
+			book_category.GET("/:id", handler.GetBookCategory)
+			book_category.PUT("/:id", handler.UpdateBookCategory)
+			book_category.DELETE("/:id", handler.DeleteBookCategory)
+		}
+
+		books := v1.Group("/books")
+		{
+			books.POST("/", handler.CreateBook)
+			books.GET("/", handler.GetAllBooks)
+			books.GET("/:id", handler.GetBook)
+			books.PUT("/:id", handler.UpdateBook)
+			books.DELETE("/:id", handler.DeleteBook)
+		}
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

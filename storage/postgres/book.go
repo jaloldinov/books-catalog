@@ -38,11 +38,9 @@ func (r *bookRepo) CreateBook(details models.Book) (string, error) {
 
 	query := `INSERT INTO book (
 		id,
+		book_name,
 		category_id,
 		author_id,
-		name,
-		price,
-		definition,
 		created_at,
 		updated_at
 	) VALUES (
@@ -50,11 +48,13 @@ func (r *bookRepo) CreateBook(details models.Book) (string, error) {
 		$2,
 		$3,
 		$4,
-		$5
+		$5,
+		$6
 	) RETURNING id;`
 
 	row := r.db.QueryRow(query,
 		details.ID,
+		details.BookName,
 		details.CategoryID,
 		details.AuthorID,
 		details.CreatedAt,
@@ -167,7 +167,6 @@ func (r *bookRepo) GetAllBooks(queryParam models.ApplicationQueryParamModel) ([]
 func (r *bookRepo) UpdateBook(entity models.UpdateBook, id string) (int64, error) {
 	params := make(map[string]interface{})
 	params["id"] = id
-	params["updated_at"] = entity.UpdatedAt
 
 	query := `UPDATE book SET `
 
@@ -182,11 +181,11 @@ func (r *bookRepo) UpdateBook(entity models.UpdateBook, id string) (int64, error
 	}
 
 	if len(entity.BookName) > 0 {
-		params["name"] = entity.BookName
-		query += `name = :name,`
+		params["book_name"] = entity.BookName
+		query += `book_name = :book_name,`
 	}
 
-	query += `updated_at = :updated_at WHERE id =:id`
+	query += `updated_at =  now() WHERE id =:id`
 
 	result, err := r.db.NamedExec(query, params)
 	if err != nil {

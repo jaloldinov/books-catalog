@@ -15,5 +15,4 @@ type CreateBookCategory struct {
 
 type UpdateBookCategory struct {
 	CategoryName string    `json:"category_name" db:"category_name" binding:"required" example:"fiction"`
-	UpdatedAt    time.Time `json:"updated_at" db:"updated_at"`
 }

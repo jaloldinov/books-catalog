@@ -14,12 +14,11 @@ type Book struct {
 type CreateBook struct {
 	CategoryID string `json:"category_id" db:"category_id" binding:"required" example:"uuid1234"`
 	AuthorID   string `json:"author_id" db:"author_id" binding:"required" example:"author_id"`
-	Name       string `json:"name" db:"name" binding:"required" example:"Start with why"`
+	BookName   string `json:"book_name" db:"book_name" binding:"required" example:"bookname"`
 }
 
 type UpdateBook struct {
-	AuthorID   string    `json:"author_id" db:"author_id" example:"uudi1234"`
-	CategoryID string    `json:"category_id" db:"category_id" example:"uudi1234"`
-	BookName   string    `json:"book_name" db:"book_name" example:"Updated book name"`
-	UpdatedAt  time.Time `json:"updated_at" db:"updated_at"`
+	AuthorID   string `json:"author_id" db:"author_id" example:"uudi1234"`
+	CategoryID string `json:"category_id" db:"category_id" example:"uudi1234"`
+	BookName   string `json:"book_name" db:"book_name" example:"Updated book name"`
 }
