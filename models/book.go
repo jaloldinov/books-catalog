@@ -20,6 +20,6 @@ type CreateBook struct {
 type UpdateBook struct {
 	AuthorID   string    `json:"author_id" db:"author_id" example:"uudi1234"`
 	CategoryID string    `json:"category_id" db:"category_id" example:"uudi1234"`
-	Name       string    `json:"name" db:"name" example:"Updated book name"`
+	BookName   string    `json:"book_name" db:"book_name" example:"Updated book name"`
 	UpdatedAt  time.Time `json:"updated_at" db:"updated_at"`
 }

@@ -16,7 +16,6 @@ type CreateAuthor struct {
 }
 
 type UpdateAuthor struct {
-	Firstname string    `json:"firstname" db:"firstname" example:"Updated John"`
-	Lastname  string    `json:"lastname" db:"lastname" example:"Updated Doe"`
-	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
+	Firstname string `json:"firstname" db:"firstname" example:"Updated John"`
+	Lastname  string `json:"lastname" db:"lastname" example:"Updated Doe"`
 }

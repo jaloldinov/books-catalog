@@ -1,0 +1,184 @@
+basePath: /api/v1
+definitions:
+  models.CreateAuthor:
+    properties:
+      firstname:
+        example: John
+        type: string
+      lastname:
+        example: Doe
+        type: string
+    required:
+    - firstname
+    - lastname
+    type: object
+  models.Response:
+    properties:
+      data: {}
+      error:
+        type: string
+      message:
+        type: string
+    type: object
+  models.UpdateAuthor:
+    properties:
+      firstname:
+        example: Updated John
+        type: string
+      lastname:
+        example: Updated Doe
+        type: string
+    type: object
+info:
+  contact:
+    email: jaloldinovuz@gmail.com
+    name: API Support
+    url: http://t.me/jaloldinovs
+  description: Book Store beta application
+  license:
+    name: MIT
+  title: Book Store
+  version: 0.0.1
+paths:
+  /authors:
+    get:
+      operationId: get_all_authors_id
+      parameters:
+      - description: search query
+        in: query
+        name: search
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: offset
+        in: query
+        name: offset
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Description of the RESPONSE
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Some bad request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: get all authors
+      tags:
+      - Author
+    post:
+      consumes:
+      - application/json
+      description: Create an author
+      operationId: create_author
+      parameters:
+      - description: author body
+        in: body
+        name: author
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateAuthor'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Description of the RESPONSE
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Some bad request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Create an author
+      tags:
+      - Author
+  /authors/{id}:
+    delete:
+      operationId: delete_author_id
+      parameters:
+      - description: author id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Description
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Some bad request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not found
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: delete an author by id
+      tags:
+      - Author
+    get:
+      operationId: get_author_id
+      parameters:
+      - description: author id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Description of the RESPONSE
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not found
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: get author by ID
+      tags:
+      - Author
+    put:
+      consumes:
+      - application/json
+      operationId: update_author_id
+      parameters:
+      - description: author id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: author update model
+        in: body
+        name: author
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateAuthor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Description
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Some bad request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not found
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update Author
+      tags:
+      - Author
+swagger: "2.0"

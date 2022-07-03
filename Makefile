@@ -7,7 +7,9 @@ migratedown:
 run: 
 	go run api/main.go
 
-swag-go:
-	swag init -g api/api.go -o api/docs
+swag-init:
+	swag init -g api/main.go -o api/docs
+
+go-run:
 	go run api/main.go
 

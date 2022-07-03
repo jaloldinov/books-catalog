@@ -1,0 +1,276 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Book Store beta application",
+        "title": "Book Store",
+        "contact": {
+            "name": "API Support",
+            "url": "http://t.me/jaloldinovs",
+            "email": "jaloldinovuz@gmail.com"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "0.0.1"
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/authors": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Author"
+                ],
+                "summary": "get all authors",
+                "operationId": "get_all_authors_id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "search query",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "offset",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Description of the RESPONSE",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Some bad request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create an author",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Author"
+                ],
+                "summary": "Create an author",
+                "operationId": "create_author",
+                "parameters": [
+                    {
+                        "description": "author body",
+                        "name": "author",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateAuthor"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Description of the RESPONSE",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Some bad request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/authors/{id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Author"
+                ],
+                "summary": "get author by ID",
+                "operationId": "get_author_id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "author id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Description of the RESPONSE",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Author"
+                ],
+                "summary": "Update Author",
+                "operationId": "update_author_id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "author id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "author update model",
+                        "name": "author",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateAuthor"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Description",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Some bad request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Author"
+                ],
+                "summary": "delete an author by id",
+                "operationId": "delete_author_id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "author id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Description",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Some bad request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.CreateAuthor": {
+            "type": "object",
+            "required": [
+                "firstname",
+                "lastname"
+            ],
+            "properties": {
+                "firstname": {
+                    "type": "string",
+                    "example": "John"
+                },
+                "lastname": {
+                    "type": "string",
+                    "example": "Doe"
+                }
+            }
+        },
+        "models.Response": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "error": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.UpdateAuthor": {
+            "type": "object",
+            "properties": {
+                "firstname": {
+                    "type": "string",
+                    "example": "Updated John"
+                },
+                "lastname": {
+                    "type": "string",
+                    "example": "Updated Doe"
+                }
+            }
+        }
+    }
+}
